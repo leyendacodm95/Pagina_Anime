@@ -9,6 +9,8 @@ body {
   line-height: 1.5;
   color: #333;
   overflow-x: hidden;
+  /* SOLUCIÓN AL PARPADEO: Un fondo oscuro mientras carga el video */
+  background-color: #303952;
 }
 
 .header {
@@ -21,15 +23,6 @@ body {
   color: #fff;
 }
 
-.content {
-  max-width: 40rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin: auto;
-  position: relative;
-  z-index: 2;
-}
-
 .header-video {
   position: absolute;
   top: 0;
@@ -37,7 +30,7 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 0;
+  z-index: 0; /* Capa 0: El fondo */
 }
 
 .header-video video {
@@ -53,27 +46,21 @@ body {
   top: 0;
   left: 0;
   background: #303952;
-  z-index: 1;
+  z-index: 1; /* Capa 1: Filtro oscuro */
   opacity: .85;
 }
 
-/* ================================================= */
-/* === NUEVO: Solución 1 - Animación de Entrada === */
-/* ================================================= */
-
-/* 1. Definimos la animación de aparición */
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
+/* LA CORRECCIÓN MÁS IMPORTANTE 👇 */
 .header-content {
-  /* 2. Hacemos el contenido invisible al inicio */
-  opacity: 0;
-  /* 3. Aplicamos la animación */
-  animation: fadeIn 1s ease-in-out 0.5s forwards;
-  /* animación: nombre duración     timing  retraso modo_final */
+  /* Estas dos líneas ponen el contenido en la capa superior y lo hacen clickeable */
+  position: relative;
+  z-index: 2; /* Capa 2: El contenido */
+
+  /* Estilos de tu clase ".content" movidos aquí para simplificar */
+  max-width: 40rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
 }
 
 .header-content h1 {
@@ -97,13 +84,11 @@ body {
   border-radius: 5px;
 }
 
-/* ================================================= */
-/* === NUEVO: Solución 2 - Estilos para el Botón en Móvil === */
-/* ================================================= */
+/* ESTILOS PARA EL BOTÓN EN MÓVIL (AHORA SÍ FUNCIONARÁN) */
 @media (max-width: 768px) {
   .btn {
-    font-size: 1rem; /* Hacemos la letra un poco más pequeña */
-    padding: 0.8rem 1rem; /* Reducimos el espacio interno para que quepa mejor */
-    white-space: nowrap; /* MUY IMPORTANTE: Evita que el texto se parta en dos líneas */
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    white-space: nowrap; /* Evita que el texto del botón se parta en dos líneas */
   }
 }

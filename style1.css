@@ -5,22 +5,19 @@
 body {
   margin: 0;
   font-family: sans-serif;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #333;
-  overflow-x: hidden;
-  /* SOLUCIÓN AL PARPADEO: Un fondo oscuro mientras carga el video */
-  background-color: #303952;
 }
 
+/* --- ESTILOS DE ESCRITORIO (Y BASE) --- */
+
 .header {
-  height: 100vh; 
+  height: 100vh; /* Vuelve a ocupar el 100% de la altura */
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: #fff;
+  overflow: hidden; /* Evita cualquier desbordamiento */
 }
 
 .header-video {
@@ -29,8 +26,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-  z-index: 0; /* Capa 0: El fondo */
+  z-index: 0;
 }
 
 .header-video video {
@@ -40,27 +36,21 @@ body {
 }
 
 .header-overlay {
-  height: 100%;
-  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   background: #303952;
-  z-index: 1; /* Capa 1: Filtro oscuro */
-  opacity: .85;
+  opacity: .85; /* Opacidad para escritorio */
+  z-index: 1;
 }
 
-/* LA CORRECCIÓN MÁS IMPORTANTE 👇 */
 .header-content {
-  /* Estas dos líneas ponen el contenido en la capa superior y lo hacen clickeable */
-  position: relative;
-  z-index: 2; /* Capa 2: El contenido */
-
-  /* Estilos de tu clase ".content" movidos aquí para simplificar */
+  position: relative; /* Clave para que z-index funcione */
+  z-index: 2; /* Pone el contenido en la capa superior, HACIÉNDOLO CLICKEABLE */
   max-width: 40rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin: auto;
+  padding: 0 1rem;
 }
 
 .header-content h1 {
@@ -71,7 +61,6 @@ body {
 
 .header-content p {
   font-size: 1.5rem;
-  display: block;
   padding-bottom: 2rem;
 }
 
@@ -84,11 +73,17 @@ body {
   border-radius: 5px;
 }
 
-/* ESTILOS PARA EL BOTÓN EN MÓVIL (AHORA SÍ FUNCIONARÁN) */
+
+/* --- ESTILOS EXCLUSIVOS PARA MÓVIL --- */
+
 @media (max-width: 768px) {
+  .header-overlay {
+    opacity: 0.6; /* Hacemos la capa más transparente para que el video se vea mejor */
+  }
+
   .btn {
     font-size: 1rem;
     padding: 0.8rem 1rem;
-    white-space: nowrap; /* Evita que el texto del botón se parta en dos líneas */
+    white-space: nowrap; /* Evita que el texto del botón se parta */
   }
 }

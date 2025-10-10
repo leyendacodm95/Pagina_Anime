@@ -10843,3 +10843,11 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+/* ================================================= */
+/* ===  SOLUCIÓN PARA IMAGEN DE FONDO EN MÓVIL  === */
+/* ================================================= */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+}

@@ -12,7 +12,6 @@ body {
 }
 
 .header {
-  /* Ocupa el 100% de la altura de la pantalla (PC o móvil) */
   height: 100vh; 
   position: relative;
   display: flex;
@@ -27,33 +26,27 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
   margin: auto;
-  /* Se asegura que el contenido esté por encima del video y el overlay */
   position: relative;
   z-index: 2;
 }
 
 .header-video {
-  /* Posiciona el contenedor del video en el fondo */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: 0; /* Lo pone detrás de todo */
+  z-index: 0;
 }
 
-/* LA REGLA MÁS IMPORTANTE 👇 */
 .header-video video {
-  /* Hace que el video cubra todo el contenedor */
   width: 100%;
   height: 100%;
-  /* Mantiene la proporción del video y recorta lo que sobre (los lados en vertical) */
   object-fit: cover; 
 }
 
 .header-overlay {
-  /* La capa oscura que va sobre el video para que el texto sea legible */
   height: 100%;
   width: 100%;
   position: absolute;
@@ -64,8 +57,23 @@ body {
   opacity: .85;
 }
 
+/* ================================================= */
+/* === NUEVO: Solución 1 - Animación de Entrada === */
+/* ================================================= */
+
+/* 1. Definimos la animación de aparición */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
 .header-content {
-  /* z-index ya no es necesario aquí, lo maneja la clase .content */
+  /* 2. Hacemos el contenido invisible al inicio */
+  opacity: 0;
+  /* 3. Aplicamos la animación */
+  animation: fadeIn 1s ease-in-out 0.5s forwards;
+  /* animación: nombre duración     timing  retraso modo_final */
 }
 
 .header-content h1 {
@@ -87,4 +95,15 @@ body {
   padding: 1rem 2rem;
   text-decoration: none;
   border-radius: 5px;
+}
+
+/* ================================================= */
+/* === NUEVO: Solución 2 - Estilos para el Botón en Móvil === */
+/* ================================================= */
+@media (max-width: 768px) {
+  .btn {
+    font-size: 1rem; /* Hacemos la letra un poco más pequeña */
+    padding: 0.8rem 1rem; /* Reducimos el espacio interno para que quepa mejor */
+    white-space: nowrap; /* MUY IMPORTANTE: Evita que el texto se parta en dos líneas */
+  }
 }

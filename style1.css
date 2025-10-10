@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+  font-family: sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   color: #333;
@@ -11,9 +12,13 @@ body {
 }
 
 .header {
-  height: 100vh;
+  /* Ocupa el 100% de la altura de la pantalla (PC o móvil) */
+  height: 100vh; 
+  position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   color: #fff;
 }
 
@@ -22,26 +27,35 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
   margin: auto;
-  text-align: center;
+  /* Se asegura que el contenido esté por encima del video y el overlay */
+  position: relative;
+  z-index: 2;
 }
 
 .header-video {
+  /* Posiciona el contenedor del video en el fondo */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
+  z-index: 0; /* Lo pone detrás de todo */
 }
 
+/* LA REGLA MÁS IMPORTANTE 👇 */
 .header-video video {
-  min-width: 100%;
-  min-height: 100%;
+  /* Hace que el video cubra todo el contenedor */
+  width: 100%;
+  height: 100%;
+  /* Mantiene la proporción del video y recorta lo que sobre (los lados en vertical) */
+  object-fit: cover; 
 }
 
 .header-overlay {
-  height: 100vh;
-  width: 100vw;
+  /* La capa oscura que va sobre el video para que el texto sea legible */
+  height: 100%;
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -51,7 +65,7 @@ body {
 }
 
 .header-content {
-  z-index: 2;
+  /* z-index ya no es necesario aquí, lo maneja la clase .content */
 }
 
 .header-content h1 {
@@ -72,46 +86,5 @@ body {
   font-size: 1.2rem;
   padding: 1rem 2rem;
   text-decoration: none;
-}
-
-/* Media query existente */
-@media (max-width: 960px) {
-  .content {
-    padding: 0 3rem 0 3rem;
-  }
-}
-
-/* ================================================= */
-/* === NUEVOS ESTILOS PARA LA VISTA EN MÓVILES === */
-/* ================================================= */
-@media (max-width: 768px) {
-  .header {
-    /* La cabecera ya no ocupa toda la pantalla y el texto cambia a oscuro */
-    height: auto;
-    color: #333;
-  }
-
-  .header-video {
-    /* El contenedor del video se vuelve un elemento normal en el flujo */
-    position: static;
-    height: auto;
-  }
-
-  .header-video video {
-    /* El video se hace responsivo, ocupando el 100% del ancho */
-    width: 100%;
-    height: auto;
-    min-width: unset; /* Se resetean los valores de escritorio */
-    min-height: unset;
-  }
-
-  .header-overlay {
-    /* Se oculta la capa oscura, ya que no es necesaria */
-    display: none;
-  }
-
-  .header-content {
-    /* Se añade un poco de espacio para que el texto no quede pegado al video */
-    padding-top: 2rem;
-  }
+  border-radius: 5px;
 }

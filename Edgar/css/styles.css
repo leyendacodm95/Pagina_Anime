@@ -10848,6 +10848,10 @@ textarea.form-control-lg {
 /* ================================================= */
 @media (max-width: 768px) {
   body {
+    /* Para que la imagen sea visible en móviles */
     background-attachment: scroll;
+
+    /* NUEVA LÍNEA: Alinea la imagen a la izquierda para que se vea el personaje */
+    background-position: left center;
   }
 }
